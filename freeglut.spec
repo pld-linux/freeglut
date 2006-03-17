@@ -15,6 +15,7 @@ BuildRequires:	libtool
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut = 3.7
+Obsoletes:	glut
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,6 +49,7 @@ Requires:	OpenGL-GLU-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut-devel = 3.7
+Obsoletes:	glut-devel
 
 %description devel
 Header files for freeglut library.
@@ -61,6 +63,7 @@ Summary(pl):	Statyczna biblioteka freeglut
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	OpenGL-glut-static = 3.7
+Obsoletes:	glut-static
 
 %description static
 Static freeglut library.
