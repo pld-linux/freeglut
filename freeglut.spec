@@ -9,8 +9,11 @@ Source0:	http://dl.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
 # Source0-md5:	6d16873bd876fbf4980a927cfbc496a1
 URL:		http://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
-# libX11, libXext, libXxf86vm
-BuildRequires:	XFree86-devel
+BuildRequires:	autoconf >= 2.59-9
+BuildRequires:	automake
+BuildRequires:	libtool
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut = 3.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +45,8 @@ Summary(pl):	Pliki nag³ówkowe biblioteki freeglut
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-GLU-devel
-Requires:	XFree86-devel
+Requires:	xorg-lib-libXext-devel
+Requires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut-devel = 3.7
 
 %description devel
@@ -68,6 +72,11 @@ Statyczna biblioteka freeglut.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 %{__make}
 
