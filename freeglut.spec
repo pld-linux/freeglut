@@ -7,6 +7,7 @@ License:	MIT
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
 # Source0-md5:	6d16873bd876fbf4980a927cfbc496a1
+Patch0:		%{name}-gcc4.patch
 URL:		http://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59-9
@@ -73,6 +74,7 @@ Statyczna biblioteka freeglut.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
