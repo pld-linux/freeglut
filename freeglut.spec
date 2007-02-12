@@ -1,5 +1,5 @@
 Summary:	A freely licensed alternative to the GLUT library
-Summary(pl):	Zamiennik biblioteki GLUT na wolnej licencji
+Summary(pl.UTF-8):   Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
 Version:	2.4.0
 Release:	1
@@ -30,20 +30,20 @@ not make use of any GLUT code and is not 100% compatible. Code
 recompilation and/or slight modifications might be required for your
 applications to work with freeglut.
 
-%description -l pl
-Freeglut to Free OpenGL Utility Toolkit, maj±cy byæ wolnodostêpnym
+%description -l pl.UTF-8
+Freeglut to Free OpenGL Utility Toolkit, majÄ…cy byÄ‡ wolnodostÄ™pnym
 zamiennikiem biblioteki GLUT Marka Kilgarda. Jest rozprowadzany na
-licencji w stylu X-Consortium (szczegó³y w pliku COPYING), aby
-umo¿liwiæ korzystanie i/lub modyfikowanie ¼róde³.
+licencji w stylu X-Consortium (szczegÃ³Å‚y w pliku COPYING), aby
+umoÅ¼liwiÄ‡ korzystanie i/lub modyfikowanie ÅºrÃ³deÅ‚.
 
 Korzysta z bibliotek OpenGL, GLU i pthread. Biblioteka nie korzysta z
-¿adnego kodu GLUT-a i nie jest w 100% kompatybilna. Do dzia³ania
-aplikacji z freeglutem mo¿e byæ konieczna rekompilacja kodu i/lub ma³e
+Å¼adnego kodu GLUT-a i nie jest w 100% kompatybilna. Do dziaÅ‚ania
+aplikacji z freeglutem moÅ¼e byÄ‡ konieczna rekompilacja kodu i/lub maÅ‚e
 modyfikacje.
 
 %package devel
 Summary:	Header files for freeglut library
-Summary(pl):	Pliki nag³ówkowe biblioteki freeglut
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki freeglut
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-GLU-devel
@@ -55,12 +55,12 @@ Obsoletes:	glut-devel
 %description devel
 Header files for freeglut library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki freeglut.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki freeglut.
 
 %package static
 Summary:	Static freeglut library
-Summary(pl):	Statyczna biblioteka freeglut
+Summary(pl.UTF-8):   Statyczna biblioteka freeglut
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	OpenGL-glut-static = 3.7
@@ -69,7 +69,7 @@ Obsoletes:	glut-static
 %description static
 Static freeglut library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka freeglut.
 
 %prep
