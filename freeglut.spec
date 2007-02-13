@@ -1,5 +1,5 @@
 Summary:	A freely licensed alternative to the GLUT library
-Summary(pl.UTF-8):   Zamiennik biblioteki GLUT na wolnej licencji
+Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
 Version:	2.4.0
 Release:	1
@@ -43,7 +43,7 @@ modyfikacje.
 
 %package devel
 Summary:	Header files for freeglut library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki freeglut
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki freeglut
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-GLU-devel
@@ -60,7 +60,7 @@ Pliki nagłówkowe biblioteki freeglut.
 
 %package static
 Summary:	Static freeglut library
-Summary(pl.UTF-8):   Statyczna biblioteka freeglut
+Summary(pl.UTF-8):	Statyczna biblioteka freeglut
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	OpenGL-glut-static = 3.7
