@@ -2,7 +2,7 @@ Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
 Version:	2.4.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
@@ -82,7 +82,8 @@ Statyczna biblioteka freeglut.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-warnings
 %{__make}
 
 %install
@@ -102,6 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/{freeglut.html,index.html,progress.html,*.png}
 %lang(fr) %doc LISEZ_MOI
 %attr(755,root,root) %{_libdir}/libglut.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libglut.so.3
 
 %files devel
 %defattr(644,root,root,755)
