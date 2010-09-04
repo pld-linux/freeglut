@@ -1,13 +1,12 @@
 Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
-Version:	2.4.0
-Release:	3
+Version:	2.6.0
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
-# Source0-md5:	6d16873bd876fbf4980a927cfbc496a1
-Patch0:		%{name}-gcc4.patch
+# Source0-md5:	39f0f2de89f399529d2b981188082218
 URL:		http://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.59-9
@@ -74,7 +73,6 @@ Statyczna biblioteka freeglut.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
