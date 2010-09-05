@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/{freeglut.html,index.html,progress.html,*.png}
+%doc AUTHORS COPYING ChangeLog FrequentlyAskedQuestions NEWS README TODO doc/{freeglut.html,index.html,progress.html,*.png}
 %lang(fr) %doc LISEZ_MOI
 %attr(755,root,root) %{_libdir}/libglut.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libglut.so.3
