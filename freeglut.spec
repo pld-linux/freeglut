@@ -5,7 +5,7 @@ Version:	2.6.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
 # Source0-md5:	39f0f2de89f399529d2b981188082218
 URL:		http://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
@@ -13,6 +13,7 @@ BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut = 4.0
 Obsoletes:	glut
