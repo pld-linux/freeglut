@@ -48,6 +48,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-GLU-devel
 Requires:	xorg-lib-libXext-devel
+Requires:	xorg-lib-libXi-devel
 Requires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut-devel = 4.0
 Obsoletes:	glut-devel
