@@ -1,19 +1,20 @@
 Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
-Version:	2.8.1
+Version:	3.0.0
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
-# Source0-md5:	918ffbddcffbac83c218bc52355b6d5a
+# Source0-md5:	90c3ca4dd9d51cf32276bc5344ec9754
 URL:		http://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	autoconf >= 2.59-9
-BuildRequires:	automake
-BuildRequires:	libtool
+BuildRequires:	OpenGL-devel
+BuildRequires:	cmake >= 2.8.8
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXi-devel
+BuildRequires:	xorg-lib-libXrandr-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut = 4.0
 Obsoletes:	glut
@@ -47,8 +48,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki freeglut
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-GLU-devel
-Requires:	xorg-lib-libXext-devel
-Requires:	xorg-lib-libXi-devel
+Requires:	xorg-lib-libX11-devel
+Requires:	xorg-lib-libXrandr-devel
 Requires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut-devel = 4.0
 Obsoletes:	glut-devel
@@ -77,19 +78,17 @@ Statyczna biblioteka freeglut.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-warnings
+install -d build
+cd build
+%cmake .. \
+	-DFREEGLUT_PRINT_WARNINGS=OFF
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -100,8 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog FrequentlyAskedQuestions NEWS README TODO doc/{freeglut.html,index.html,progress.html,*.png}
-%lang(fr) %doc LISEZ_MOI
+%doc AUTHORS COPYING ChangeLog README doc/{freeglut.html,index.html,progress.html,*.png}
 %attr(755,root,root) %{_libdir}/libglut.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libglut.so.3
 
@@ -109,9 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/{freeglut_user_interface.html,structure.html}
 %attr(755,root,root) %{_libdir}/libglut.so
-%{_libdir}/libglut.la
 %{_includedir}/GL/freeglut*.h
 %{_includedir}/GL/glut.h
+%{_pkgconfigdir}/freeglut.pc
 
 %files static
 %defattr(644,root,root,755)
