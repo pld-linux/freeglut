@@ -1,13 +1,13 @@
 Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
-Version:	3.0.0
+Version:	3.2.2
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
-# Source0-md5:	90c3ca4dd9d51cf32276bc5344ec9754
-URL:		http://freeglut.sourceforge.net/
+Source0:	https://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
+# Source0-md5:	485c1976165315fc42c0b0a1802816d9
+URL:		https://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	cmake >= 2.8.8
@@ -99,17 +99,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README doc/{freeglut.html,index.html,progress.html,*.png}
+%doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_libdir}/libglut.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libglut.so.3
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/{freeglut_user_interface.html,structure.html}
 %attr(755,root,root) %{_libdir}/libglut.so
 %{_includedir}/GL/freeglut*.h
 %{_includedir}/GL/glut.h
-%{_pkgconfigdir}/freeglut.pc
+%{_pkgconfigdir}/glut.pc
+%{_libdir}/cmake/FreeGLUT
 
 %files static
 %defattr(644,root,root,755)
