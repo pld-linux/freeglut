@@ -2,7 +2,7 @@ Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
 Version:	3.2.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
@@ -10,14 +10,14 @@ Source0:	https://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
 URL:		https://freeglut.sourceforge.net/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
-BuildRequires:	cmake >= 2.8.8
+BuildRequires:	cmake >= 3.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXrandr-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut = 4.0
-Obsoletes:	glut
+Obsoletes:	glut < 4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,7 +52,7 @@ Requires:	xorg-lib-libX11-devel
 Requires:	xorg-lib-libXrandr-devel
 Requires:	xorg-lib-libXxf86vm-devel
 Provides:	OpenGL-glut-devel = 4.0
-Obsoletes:	glut-devel
+Obsoletes:	glut-devel < 4
 
 %description devel
 Header files for freeglut library.
@@ -66,7 +66,7 @@ Summary(pl.UTF-8):	Statyczna biblioteka freeglut
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	OpenGL-glut-static = 4.0
-Obsoletes:	glut-static
+Obsoletes:	glut-static < 4
 
 %description static
 Static freeglut library.
@@ -90,6 +90,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# disable completeness check incompatible with split packaging
+%{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' \
+	$RPM_BUILD_ROOT%{_libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
 
 %clean
 rm -rf $RPM_BUILD_ROOT
