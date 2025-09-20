@@ -1,21 +1,41 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# static library
+%bcond_with	gles		# OpenGL ES instead of OpenGL
+%bcond_with	wayland		# Wayland instead of X11
+
 Summary:	A freely licensed alternative to the GLUT library
 Summary(pl.UTF-8):	Zamiennik biblioteki GLUT na wolnej licencji
 Name:		freeglut
-Version:	3.2.2
-Release:	2
+Version:	3.6.0
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/freeglut/%{name}-%{version}.tar.gz
-# Source0-md5:	485c1976165315fc42c0b0a1802816d9
+# Source0-md5:	1a1c4712b3100f49f5dea22a1ad57c34
 URL:		https://freeglut.sourceforge.net/
+%if %{with gles}
+BuildRequires:	EGL-devel
+BuildRequires:	OpenGLESv1-devel
+BuildRequires:	OpenGLESv2-devel
+%else
 BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	OpenGL-devel
-BuildRequires:	cmake >= 3.0.0
+BuildRequires:	OpenGL-devel >= 1.0
+%endif
+BuildRequires:	cmake >= 3.1
+%if %{with wayland}
+BuildRequires:	EGL-devel
+BuildRequires:	pkgconfig
+BuildRequires:	wayland-devel
+BuildRequires:	wayland-egl-devel
+BuildRequires:	xorg-lib-libxkbcommon-devel
+%else
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXrandr-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
+%endif
 Provides:	OpenGL-glut = 4.0
 Obsoletes:	glut < 4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,10 +67,17 @@ Summary:	Header files for freeglut library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki freeglut
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	OpenGL-GLU-devel
+%if %{with wayland}
+Requires:	EGL-devel
+Requires:	wayland-devel
+Requires:	wayland-egl-devel
+Requires:	xorg-lib-libxkbcommon-devel
+%else
+Requires:	OpenGL-devel
 Requires:	xorg-lib-libX11-devel
 Requires:	xorg-lib-libXrandr-devel
 Requires:	xorg-lib-libXxf86vm-devel
+%endif
 Provides:	OpenGL-glut-devel = 4.0
 Obsoletes:	glut-devel < 4
 
@@ -81,7 +108,10 @@ Statyczna biblioteka freeglut.
 install -d build
 cd build
 %cmake .. \
-	-DFREEGLUT_PRINT_WARNINGS=OFF
+	%{!?with_static_libs:-DFREEGLUT_BUILD_STATIC_LIBS=OFF} \
+	%{?with_gles:-DFREEGLUT_GLES=ON} \
+	-DFREEGLUT_PRINT_WARNINGS=OFF \
+	%{?with_wayland:-DFREEGLUT_WAYLAND=ON}
 
 %{__make}
 
@@ -91,10 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# disable completeness check incompatible with split packaging
-%{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' \
-	$RPM_BUILD_ROOT%{_libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -103,18 +129,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README
+%doc AUTHORS COPYING ChangeLog README.md
 %attr(755,root,root) %{_libdir}/libglut.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libglut.so.3
+%ghost %{_libdir}/libglut.so.3
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libglut.so
+%{_libdir}/libglut.so
 %{_includedir}/GL/freeglut*.h
 %{_includedir}/GL/glut.h
 %{_pkgconfigdir}/glut.pc
 %{_libdir}/cmake/FreeGLUT
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libglut.a
+%endif
